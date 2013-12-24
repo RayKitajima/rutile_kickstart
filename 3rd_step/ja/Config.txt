@@ -1,0 +1,25 @@
+
+// *** application config ***
+
+// name of this application
+APP_NAME : DemoShop
+
+// limiting select *
+SelectAllLimit : 1000
+
+// now available 'en' and 'ja'
+DefaultLanguage : ja
+
+// use predefined region for map, still defined tokyo only
+//Map : Tokyo
+// otherwise, define custom map region
+GeoTools_DefaultRegion_longitude      : 139.78317260742188
+GeoTools_DefaultRegion_latitude       : 35.65126037597656
+GeoTools_DefaultRegion_longitudeDelta : 0.439453125
+GeoTools_DefaultRegion_latitudeDelta  : 0.46421724557876587
+GeoTools_DefaultLongitudeDelta        : 0.003433227539
+GeoTools_DefaultLatitudeDelta         : 0.003635423956
+
+// import segment files
+@Product.txt
+@Order.txt

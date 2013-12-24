@@ -1,0 +1,38 @@
+// 
+// product database difinition
+// 
+
+=== Product (Product) ===
+
+# Product (Product)
+sequence:productSeq(1000)
+
+	field*					type*		name*				search*				valid*			tags
+	-----------------------+-----------+-------------------+-------------------+---------------+--------------------------------------------
+	productID				int4		ProductID			key					notNull
+	productName(*)			text		Product Name		key,like,orderby	notNull
+	price					int2		Price				num,orderby			positiveValue
+	productClassID			int			ProductClassID		key					notNull			helper:Product/ProductClass
+	productStatusID			int			ProductStatusID		key					notNull			helper:Product/ProductStatus
+	registerDate			timestamp	Registered Date		timestamp,orderby	timestampString
+
+
+# ProductClass (Product Class)
+sequence:productClassSeq(1000)
+
+	field*					type*		name*				search*				valid*			tags
+	-----------------------+-----------+-------------------+-------------------+---------------+--------------------------------------------
+	productClassID			int4		ProductClassID		key					notNull
+	productClassCode		text		ProductClassCode	key,orderby			notNull
+	productClassName(*)		text		ProductClass Name	key					notNull
+
+
+# ProductStatus (Product Status)
+sequence:productStatusSeq(1000)
+
+	field*					type*		name*				search*				valid*			tags
+	-----------------------+-----------+-------------------+-------------------+---------------+--------------------------------------------
+	productStatusID			int4		ProductStatusID		key					notNull
+	productStatusCode		text		ProductStatusCode	key,orderby			notNull
+	productStatusName(*)	text		ProductStatus Name	key					notNull
+

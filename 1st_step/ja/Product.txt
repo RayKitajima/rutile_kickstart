@@ -1,0 +1,38 @@
+// 
+// Product database difinition
+// 
+
+=== Product (商品) ===
+
+# Product (商品)
+sequence:productSeq(1000)
+
+	field*					type*		name*		search*				valid*			tags
+	-----------------------+-----------+-----------+-------------------+---------------+--------------------------------------------
+	productID				int4		商品ID		key					notNull
+	productName(*)			text		商品名		key,like,orderby	notNull
+	price					int2		価格			num,orderby			positiveValue
+	productClassID			int			商品区分ID	key					notNull			helper:Product/ProductClass
+	productStatusID			int			商品状態ID	key					notNull			helper:Product/ProductStatus
+	registerDate			timestamp	登録日		timestamp,orderby	timestampString
+
+
+# ProductClass (商品区分)
+sequence:productClassSeq(1000)
+
+	field*					type*		name*		search*				valid*			tags
+	-----------------------+-----------+-----------+-------------------+---------------+--------------------------------------------
+	productClassID			int4		商品区分ID	key					notNull
+	productClassCode		text		商品区分Code	key,orderby			notNull
+	productClassName(*)		text		商品区分名	key					notNull
+
+
+# ProductStatus (商品状態)
+sequence:productStatusSeq(1000)
+
+	field*					type*		name*		search*				valid*			tags
+	-----------------------+-----------+-----------+-------------------+---------------+--------------------------------------------
+	productStatusID			int4		商品状態ID	key					notNull
+	productStatusCode		text		商品状態Code	key,orderby			notNull
+	productStatusName(*)	text		商品状態名	key					notNull
+

@@ -1,0 +1,15 @@
+
+// *** application config ***
+
+// name of this application
+APP_NAME : DemoShop
+
+// limiting select *
+SelectAllLimit : 1000
+
+// now available 'en' and 'ja'
+DefaultLanguage : en
+
+// import segment files
+@Product.txt
+
