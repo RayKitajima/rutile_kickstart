@@ -1,24 +1,12 @@
 // 
-// you can inject custom autoset function for the cross EditForm event, imageSelected and entitySelected.
+// you can inject custom autoset function for the cross EditForm event: 'imageSelected' and 'entitySelected'.
 // 
 
-var OrderOrderItemProductNameAutosetter = "
-function(event){
-	var entity = event.entity;
-	self.setValue(entity.productName);
-	notify();
-}";
+var fs = require('fs');
 
-var OrderOrderItemPriceAutosetter = "
-function(event){
-	var entity = event.entity;
-	self.setValue(entity.price);
-	notify();
-}";
-
-exports = {
+module.exports = {
 	"entitySelected" : {
-		"Order/OrderItem.productName" : OrderOrderItemProductNameAutosetter,
-		"Order/OrderItem.price"       : OrderOrderItemPriceAutosetter
+		"Order/OrderItem.productName" : fs.readFileSync(__dirname+'/Autosetter_productName.js').toString(),
+		"Order/OrderItem.price"       : fs.readFileSync(__dirname+'/Autosetter_price.js').toString()
 	},
 };
