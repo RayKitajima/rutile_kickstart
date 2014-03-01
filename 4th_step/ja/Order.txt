@@ -1,0 +1,53 @@
+// 
+// Order database difinition
+// 
+// * OrderItem has external key for Product/Product, this requires dblink installed in your database.
+// * autoset tag in OrderItem defines custom autoset function for event:entitySelected,
+//   this requires autoset function defined in ./Inject/Autosetter.js for its field identifier, 'Order/OrderItem.productName' and so on.
+// 
+
+=== Order (注文) ===
+
+# Order (注文)
+aggregate:Order/OrderOrderItem
+sequence:orderSeq(1000)
+
+	field*					type*		name*			search*				valid*			tags
+	-----------------------+-----------+---------------+-------------------+---------------+---------------------
+	orderID					int4		注文ID			key					notNull			
+	customerID				int4		顧客ID			key,orderby,join	notNull			helper:Order/Customer
+	orderDate(*)			timestamp	注文日			timestamp,orderby	timestampString	
+
+
+* OrderOrderItem (注文注文アイテム)
+
+	collector/collected*					type*	name	valid
+	---------------------------------------+-------+-------+----
+	Order/Order.orderID						int4	
+	Order/OrderItem.orderItemID				int4	
+
+
+# OrderItem (注文アイテム)
+sequence:orderItemSeq(1000)
+
+	field*					type*		name*			search*				valid*			tags
+	-----------------------+-----------+---------------+-------------------+---------------+---------------------
+	orderItemID				int4		注文アイテムID		key					notNull
+	productID				int4		商品ID			key,orderby			notNull			helper:Product/Product
+	productName(*)			text		商品名			key,like,orderby	notNull			autoset:entitySelected
+	price					int2		価格				num,orderby			notNull			autoset:entitySelected
+
+
+# Customer (顧客)
+sequence:customerSeq(1000)
+
+	field*					type*		name*			search*				valid*			tags
+	-----------------------+-----------+---------------+-------------------+---------------+---------------------
+	customerID				int4		顧客ID			key					notNull
+	customerName(*)			text		顧客名			like				notNull
+	customerAddress			text		住所				like				notNull
+	customerEmail			text		メールアドレス		like				notNull
+
+
+
+
