@@ -1,0 +1,35 @@
+// 
+// Shop database difinition
+// 
+
+=== Shop (ショップ) ===
+
+# Shop (ショップ)
+aggregate:Shop/ShopEmployee
+sequence:shopSeq(1000)
+
+	field*			type*		name*			search*		valid*			tags
+	---------------+-----------+---------------+-----------+---------------+---------------------
+	shopID			int4		ショップID		key			notNull			
+	shopName(*)		text		ショップ名		like		notNull			
+	address			text		住所				like		notNull
+
+
+* ShopEmployee (Shop-Employee)
+
+	collector/collected*		type*	name	valid
+	---------------------------+-------+-------+----
+	Shop/Shop.shopID			int4	
+	Shop/Employee.employeeID	int4	
+
+
+# Employee (店員)
+sequence:employeeSeq(1000)
+
+	field*			type*		name*			search*		valid*			tags
+	---------------+-----------+---------------+-----------+---------------+---------------------
+	employeeID		int4		店員ID			key			notNull
+	name(*)			text		名前				key,like	notNull
+	email			text		メール			key,like	notNull
+	password		text		パスワード		like		notNull
+

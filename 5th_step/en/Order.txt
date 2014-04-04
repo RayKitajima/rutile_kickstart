@@ -1,0 +1,51 @@
+// 
+// Order database difinition
+// 
+// * OrderItem has external key for Product/Product, this requires dblink installed in your database.
+// * autoset tag in OrderItem defines custom autoset function for event:entitySelected,
+//   this requires autoset function defined in ./Inject/Autosetter.js for its field identifier, 'Order/OrderItem.productName' and so on.
+// 
+
+=== Order (Order) ===
+
+# Order (Order)
+aggregate:Order/OrderOrderItem
+sequence:orderSeq(1000)
+
+	field*					type*		name*			search*				valid*			tags
+	-----------------------+-----------+---------------+-------------------+---------------+---------------------
+	orderID					int4		OrderID			key					notNull			
+	customerID				int4		CustomerID		key,orderby,join	notNull			helper:Order/Customer
+	orderDate(*)			timestamp	Date of Order	timestamp,orderby	timestampString	
+
+
+* OrderOrderItem (Order-OrderItem)
+
+	collector/collected*					type*	name	valid
+	---------------------------------------+-------+-------+----
+	Order/Order.orderID						int4	
+	Order/OrderItem.orderItemID				int4	
+
+# OrderItem (Ordered Item)
+sequence:orderItemSeq(1000)
+
+	field*					type*		name*			search*				valid*			tags
+	-----------------------+-----------+---------------+-------------------+---------------+---------------------
+	orderItemID				int4		OrderItemID		key					notNull
+	orderID					int4		OrderID			key,orderby			notNull
+	productID				int4		ProductID		key,orderby			notNull			helper:Product/Product
+	productName(*)			text		Product Name	key,like,orderby	notNull			autoset:entitySelected
+	price					int2		Price			num,orderby			notNull			autoset:entitySelected
+
+
+# Customer (Customer)
+sequence:customerSeq(1000)
+
+	field*					type*		name*			search*				valid*			tags
+	-----------------------+-----------+---------------+-------------------+---------------+---------------------
+	customerID				int4		CustomerID		key					notNull
+	customerName(*)			text		Name			like				notNull
+	customerAddress			text		Address			like				notNull
+	customerEmail			text		Email Address	like				notNull
+
+

@@ -1,0 +1,33 @@
+// 
+// Shop database difinition
+// 
+
+=== Shop (Shop) ===
+
+# Shop (Shop)
+aggregate:Shop/Employee
+sequence:shopSeq(1000)
+
+	field*			type*		name*			search*		valid*			tags
+	---------------+-----------+---------------+-----------+---------------+---------------------
+	shopID			int4		ShopID			key			notNull			
+	shopName(*)		text		Shop Name		like		notNull			
+	address			text		Address			like		notNull
+
+* ShopEmployee (Shop-Employee)
+
+	collector/collected*		type*	name	valid
+	---------------------------+-------+-------+----
+	Shop/Shop.shopID			int4	
+	Shop/Employee.employeeID	int4	
+
+# Employee (Employee)
+sequence:employeeSeq(1000)
+
+	field*			type*		name*			search*		valid*			tags
+	---------------+-----------+---------------+-----------+---------------+---------------------
+	employeeID		int4		EmployeeID		key			notNull
+	name(*)			text		Name			key,like	notNull
+	email			text		Email Address	key,like	notNull
+	password		text		Password		like		notNull
+

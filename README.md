@@ -29,7 +29,7 @@ psql -f ./Schema/Product.sql -d product
 psql -f ./SampleData/Product.sql -d product
 
 export NODE_PATH=$NODE_PATH:./DemoShopServer; node ./DemoShopServer/server.js
-titanium build -p ios -d ./DemoShopApp
+titanium build -p ios -d ./DemoShopApp --retina --sim-64-btin --tall
 ```
 
 ## 2nd_step
@@ -55,7 +55,7 @@ psql -f ./Schema/Product.sql -d product
 psql -f ./SampleData/Product.sql -d product
 
 export NODE_PATH=$NODE_PATH:./DemoShopServer; node ./DemoShopServer/server.js
-titanium build -p ios -d ./DemoShopApp
+titanium build -p ios -d ./DemoShopApp --retina --sim-64-btin --tall
 ```
 
 ## 3rd_step
@@ -89,7 +89,7 @@ psql -f ./Schema/Order.sql -d order
 echo 'create extension dblink' | psql -d order
 
 export NODE_PATH=$NODE_PATH:./DemoShopServer; node ./DemoShopServer/server.js
-titanium build -p ios -d ./DemoShopApp
+titanium build -p ios -d ./DemoShopApp --retina --sim-64-btin --tall
 ```
 
 1. Entity List -> Order
@@ -133,7 +133,7 @@ psql -f ./Schema/Shop.sql -d shop
 psql -f ./SampleData/Shop.sql -d shop
 
 export NODE_PATH=$NODE_PATH:./DemoShopServer; node ./DemoShopServer/server.js
-titanium build -p ios -d ./DemoShopApp
+titanium build -p ios -d ./DemoShopApp --retina --sim-64-btin --tall
 ```
 
 1. Try sign-in by email address and password defined in SampleData/Shop.sql.
@@ -141,6 +141,42 @@ titanium build -p ios -d ./DemoShopApp
 3. After 1min(default token lifetime defined in Config) token will be expired, then appears dialog message.
 5. Singn-in again.
 
+
+## 5th_step
+
+5th_step = 4th_step + slide menu option
+
+```
+cd 5th_step/en
+
+rutile md2config ./Config.txt
+rutile generate server ./Config.js
+rutile generate client ./Config.js
+rutile build tiapp ./Config.js
+
+dropdb product
+
+createdb product
+echo 'create extension postgis' | psql -d product
+
+psql -f ./Schema/Product.sql -d product
+psql -f ./SampleData/Product.sql -d product
+
+dropdb order
+
+createdb order
+psql -f ./Schema/Order.sql -d order
+echo 'create extension dblink' | psql -d order
+
+dropdb shop
+
+createdb shop
+psql -f ./Schema/Shop.sql -d shop
+psql -f ./SampleData/Shop.sql -d shop
+
+export NODE_PATH=$NODE_PATH:./DemoShopServer; node ./DemoShopServer/server.js
+titanium build -p ios -d ./DemoShopApp --retina --sim-64-btin --tall
+```
 
 ## Special thanks
 
