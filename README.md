@@ -149,6 +149,12 @@ titanium build -p ios -d ./DemoShopApp --retina --sim-64-btin --tall
 ```
 cd 5th_step/en
 
+// generate wss connecting client/server
+cp ./Config_wss.txt ./Config.txt
+
+// generate https connecting client/server
+cp ./Config_https.txt ./Config.txt
+
 rutile md2config ./Config.txt
 rutile generate server ./Config.js
 rutile generate client ./Config.js
