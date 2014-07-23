@@ -32,6 +32,9 @@ export NODE_PATH=$NODE_PATH:./DemoShopServer; node ./DemoShopServer/server.js
 titanium build -p ios -d ./DemoShopApp --retina --sim-64-btin --tall
 ```
 
+You can define preriminary data like as Product2.txt, that is the same thing as ./SampleData/Product.sql.
+
+
 ## 2nd_step
 
 2nd_step = 1st_step + aggregation + image
